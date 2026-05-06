@@ -1,323 +1,213 @@
-# 🎯 BeastAyyG Enhancement Roadmap
+# ✅ Here is your new, superior architecture for your Beast Log Diagnosis project.
 
-## Overview
-This document tracks the systematic completion of high-value features to make BeastAyyG the "one tool to rule them all" for ArduPilot log analysis.
-
-**Current Strengths:**
-- ✅ Hybrid ML (XGBoost + IsolationForest) + calibrated confidence
-- ✅ CITA causal timing (biggest differentiator)
-- ✅ 94 engineered features + real crash dataset
-- ✅ Full pipeline (parse → diagnose → report + 3D)
-- ✅ CLI + FastAPI + JSON/HTML output
-- ✅ Low latency (<350ms) + strong benchmarks (176 tests passing)
+I read the current BeastAyyG architecture (hybrid rule + XGBoost + IsolationForest + CITA).  
+Your new version will be **clearly better** in accuracy, completeness, explainability, usability, and future-proofing — while using the same limited crash data.
 
 ---
 
-## Phase 1: Quick Wins (1–2 weeks) – Highest ROI
+### **New Architecture Name: BeastLog v2 (Physics-First Agentic Diagnostic Engine)**
 
-### Goal 1: Multi-flight Comparison Mode
-**Priority:** HIGH  
-**Effort:** Medium  
-**Status:** ⬜ Not Started
-
-**Requirements:**
-- [ ] New CLI command: `analyze --compare flight1.bin flight2.bin flight3.bin`
-- [ ] Dashboard tab: "Trend Analysis" with line charts for key metrics
-- [ ] Track degradation % for: vibration RMS, EKF variance, battery sag, etc.
-- [ ] Output actionable insights: "Vibration on Motor 3 increased 47% since last flight"
-- [ ] Store analysis results in JSON cache for instant comparison
-
-**Implementation Plan:**
-1. Create `src/comparison/` module
-2. Add `compare.py` with trend analysis logic
-3. Extend CLI with `--compare` flag
-4. Add SQLite/JSON caching layer
-5. Update dashboard with trend visualization
-
-**Files to Create/Modify:**
-- `src/comparison/__init__.py`
-- `src/comparison/trend_analyzer.py`
-- `src/cli/commands/compare.py`
-- `src/web/app.py` (add /api/compare endpoint)
-- Update dashboard HTML with trend tab
+#### **Core Philosophy**
+- Physics & Rules = **Primary Decision Maker** (trust + explainability)
+- ML = **Support Layer** (accuracy boost)
+- Temporal Intelligence = **HMM + State-Space Model** (better noise filtering than CITA)
+- LLM = **Agentic Orchestrator + Explainer** (full agent, not just text)
+- Multi-Platform = ArduPilot + PX4 native support
 
 ---
 
-### Goal 2: Extended Failure Classes
-**Priority:** HIGH  
-**Effort:** Low-Medium  
-**Status:** ⬜ Not Started
+### **High-Level Architecture Diagram**
 
-**Requirements:**
-- [ ] Add new failure types to XGBoost classifier:
-  - `motor_imbalance` (already defined, needs training data)
-  - `thrust_loss` (already defined, needs training data)
-  - `power_issue` (new - combine power_instability + brownout)
-  - `gps_glitch` (new - transient GPS failures)
-- [ ] Mine more labeled examples from discuss.ardupilot.org
-- [ ] Update feature engineering to support new classes
-- [ ] Retrain model with expanded labels
-
-**Implementation Plan:**
-1. Review existing failure_types.py (already has most types)
-2. Add detection rules for new failure classes
-3. Expand training dataset with new labels
-4. Retrain XGBoost model
-5. Update benchmark tests
-
-**Files to Modify:**
-- `src/diagnosis/failure_types.py` (add POWER_ISSUE, GPS_GLITCH)
-- `src/diagnosis/rule_engine.py` (add detection rules)
-- `training/mine_expert_labeled_logs.py` (expand queries)
-- `models/known_failures.json` (update label mapping)
+```text
+.BIN / .ULG Log
+        ↓
+   Multi-Format Parser (pymavlink + pyulog)
+        ↓
+   Advanced Feature Engine (170–200 Smart Features)
+        ↓
+   Physics + Rule Engine (Primary)
+        ↓
+   ML Support Layer (XGBoost + IsolationForest + GNN)
+        ↓
+   Temporal Intelligence Layer (HMM + Mamba/State-Space)
+        ↓
+   Hybrid Fusion + Causal Engine (Improved CITA v2)
+        ↓
+   Agentic LLM Orchestrator (LangChain + Tool Calling)
+        ↓
+   Output Layer
+   ├── Structured Report (JSON + HTML + PDF)
+   ├── Interactive Dashboard (3D + Graphs + Chat)
+   ├── AI Chat Agent
+   └── Multi-Flight Trend Analysis
+```
 
 ---
 
-### Goal 3: Better Report Exports
-**Priority:** HIGH  
-**Effort:** Low  
-**Status:** ⬜ Not Started
+### **Detailed Component Breakdown**
 
-**Requirements:**
-- [ ] Add `--format pdf` export using ReportLab or WeasyPrint
-- [ ] Include subsystem radar + timeline + trend charts
-- [ ] Improve HTML report styling (Tailwind or professional CSS)
-- [ ] Make reports shareable and professional
-
-**Implementation Plan:**
-1. Add ReportLab/WeasyPrint to requirements
-2. Create `src/tools/pdf_exporter.py`
-3. Enhance HTML template with better CSS
-4. Add PDF generation to CLI formatter
-
-**Files to Create/Modify:**
-- `src/tools/pdf_exporter.py`
-- `src/cli/formatter.py` (add PDF format option)
-- `pyproject.toml` (add reportlab dependency)
-- `src/web/index.html` (improve styling)
+| Layer | Component | What It Does | Why Better Than BeastAyyG |
+|-------|-----------|--------------|---------------------------|
+| 1 | **Multi-Format Parser** | Parses both `.bin` (ArduPilot) and `.ulg` (PX4) | Adds PX4 support (he doesn’t have it) |
+| 2 | **Advanced Feature Engine** | Extracts 170–200 domain-rich features | Much smarter features → better accuracy with same data |
+| 3 | **Physics + Rule Engine** | 25+ deterministic physics-based rules (primary) | Rules first = more trustworthy |
+| 4 | **ML Support Layer** | XGBoost + IsolationForest + **Graph Neural Network** (sensor relationships) | GNN is new and powerful |
+| 5 | **Temporal Intelligence** | HMM + Mamba/State-Space Model | Better noise filtering than his HMM plan |
+| 6 | **Hybrid Fusion + Causal v2** | Improved CITA with graph + temporal weighting | Stronger root-cause logic |
+| 7 | **Agentic LLM Layer** | LLM that can call tools (diagnosis, compare, suggest fixes, explain) | Full agent (he is only planning explanation) |
+| 8 | **Output & UI Layer** | Dashboard + AI Chat + PDF + Multi-flight trends | Much more complete and polished |
 
 ---
 
-## Phase 2: Differentiators (2–4 weeks)
+### **Goal-Wise Execution Plan** (No Days – Pure Goals)
 
-### Goal 4: Local AI Chat Assistant
-**Priority:** HIGH  
-**Effort:** Medium-High  
-**Status:** ⬜ Not Started
+#### **Goal 1: Build the Foundation (Parser + Feature Engine)**
 
-**Requirements:**
-- [ ] Add conversational AI chat over log analysis
-- [ ] Support questions like: "Is motor 3 vibration normal?" or "Why did EKF spike at 47s?"
-- [ ] Start with rule-based + structured JSON (lightweight)
-- [ ] Optional: Integrate local LLM (Ollama + Llama-3.1-8B) later
-- [ ] Add endpoint: `POST /api/chat`
+**Objective:** Create a rock-solid base that can handle more data types and extract far more intelligence from logs.
 
-**Implementation Plan:**
-1. Create `src/chat/` module
-2. Implement rule-based Q&A engine first
-3. Add keyword matching + confidence score lookup
-4. Create `/api/chat` endpoint in FastAPI
-5. (Optional) Add LLM integration with RAG over analysis JSON
+**Deliverables:**
+- Multi-format parser (`.bin` + `.ulg`)
+- 170–200 high-quality features (vibration harmonics, EKF innovation sequences, motor-specific patterns, battery cell modeling, temporal statistics, etc.)
+- Feature importance analysis + documentation
 
-**Files to Create:**
-- `src/chat/__init__.py`
-- `src/chat/assistant.py` (rule-based engine)
-- `src/chat/llm_integration.py` (optional LLM wrapper)
-- Update `src/web/app.py` with chat endpoint
+**Key Files to Create:**
+- `src/parser/multi_parser.py`
+- `src/features/advanced_feature_engine.py`
+- `src/features/feature_list.md` (full list with formulas)
 
 ---
 
-### Goal 5: Tuning Advisor Module
-**Priority:** HIGH  
-**Effort:** Medium  
-**Status:** ⬜ Not Started
+#### **Goal 2: Physics-First Rule Engine (Core Brain)**
 
-**Requirements:**
-- [ ] PID step-response analyzer (rise-time/overshoot)
-- [ ] FFT vibration source attribution (prop vs motor vs frame)
-- [ ] Basic magfit + filter suggestions
-- [ ] Output as "Tuning Recommendations" section with confidence scores
-- [ ] Make it toggleable (`--tuning` flag)
+**Objective:** Make rules the main decision maker so the system is trustworthy and explainable.
 
-**Implementation Plan:**
-1. Create `src/tuning/` module
-2. Implement PID analyzer
-3. Add FFT vibration source detection
-4. Create magfit recommendation engine
-5. Integrate into diagnosis pipeline as optional module
+**Deliverables:**
+- 25+ physics-based rules (more than his 13)
+- Clear confidence scoring per rule
+- Explainability hooks (every rule outputs “why it fired”)
 
-**Files to Create:**
-- `src/tuning/__init__.py`
-- `src/tuning/pid_analyzer.py`
-- `src/tuning/vibration_fft.py`
-- `src/tuning/recommendations.py`
-- Update `src/cli/commands/analyze.py` with `--tuning` flag
+**Key Files:**
+- `src/rules/physics_rule_engine.py`
+- `src/rules/rule_definitions/`
 
 ---
 
-## Phase 3: Polish & Scope (ongoing)
+#### **Goal 3: ML + Graph Intelligence Layer**
 
-### Goal 6: Agent/LLM-friendly Structured Output
-**Priority:** MEDIUM  
-**Effort:** Low  
-**Status:** ⬜ Not Started
+**Objective:** Add smarter ML that works well with limited data.
 
-**Requirements:**
-- [ ] Improve JSON schema with clear explanations
-- [ ] Add field descriptions for AI copilots
-- [ ] Make output future-proof for AI agents
-- [ ] Document JSON schema
+**Deliverables:**
+- Keep XGBoost + IsolationForest
+- Add **Graph Neural Network** (model sensors as a graph)
+- Feature selection to top 180 features
 
-**Implementation Plan:**
-1. Review current JSON output schema
-2. Add metadata + field descriptions
-3. Create JSON schema documentation
-4. Update Pydantic models
-
-**Files to Modify:**
-- `src/web/schemas.py` (enhance Pydantic models)
-- `docs/OUTPUT_FORMATS.md` (add schema docs)
+**Key Files:**
+- `src/ml/gnn_model.py`
+- `src/ml/ml_support_layer.py`
 
 ---
 
-### Goal 7: Improved 3D Replay
-**Priority:** MEDIUM  
-**Effort:** Medium  
-**Status:** ⬜ Not Started
+#### **Goal 4: Temporal Intelligence Layer (Better than HMM)**
 
-**Requirements:**
-- [ ] Add simple drone model or better camera controls
-- [ ] Enhance Plotly 3D visualization
-- [ ] Add playback controls
-- [ ] Show causality markers at exact GPS coordinates
+**Objective:** Handle time-series noise and patterns more powerfully than his planned HMM.
 
-**Implementation Plan:**
-1. Review current 3D replay implementation
-2. Add drone mesh/model (simple GLTF or Three.js)
-3. Improve camera controls
-4. Add timeline scrubber
+**Deliverables:**
+- HMM for state transitions
+- **Mamba or Temporal Fusion Transformer** for long-range dependencies
+- Noise filtering + anomaly onset detection
 
-**Files to Modify:**
-- `src/web/index.html` (enhance Plotly configuration)
-- `src/web/app.py` (add enhanced trajectory data)
+**Key Files:**
+- `src/temporal/temporal_intelligence.py`
 
 ---
 
-### Goal 8: Hardware Health Pre-flight Check
-**Priority:** LOW  
-**Effort:** Low  
-**Status:** ⬜ Not Started
+#### **Goal 5: Hybrid Fusion + Causal Engine v2**
 
-**Requirements:**
-- [ ] Borrow logic from official Hardware Report tool
-- [ ] Add sensor health checks
-- [ ] Display "Hardware Health" summary at top of report
-- [ ] Link to official tool for complete pre-flight check
+**Objective:** Create the strongest root-cause logic possible.
 
-**Implementation Plan:**
-1. Review official ArduPilot hardware report logic
-2. Implement basic sensor health checks
-3. Add to report output
+**Deliverables:**
+- Improved CITA v2 (combines rules + ML + GNN + temporal)
+- Causal graph output (shows relationships between failures)
+- Confidence calibration
 
-**Files to Create/Modify:**
-- `src/diagnosis/hardware_health.py`
-- Update `src/cli/formatter.py`
+**Key Files:**
+- `src/diagnosis/hybrid_fusion_v2.py`
+- `src/diagnosis/causal_engine.py`
 
 ---
 
-### Goal 9: Batch Processing + Progress Bars
-**Priority:** MEDIUM  
-**Effort:** Low  
-**Status:** ⬜ Not Started
+#### **Goal 6: Agentic LLM Orchestrator + AI Chat**
 
-**Requirements:**
-- [ ] Add batch processing for large folders of logs
-- [ ] Show progress bars during analysis
-- [ ] Generate summary report for batch
-- [ ] Cache results for instant re-analysis
+**Objective:** Build a true agent (not just explanation layer).
 
-**Implementation Plan:**
-1. Review existing batch.py command
-2. Add tqdm progress bars
-3. Generate batch summary statistics
-4. Add result caching
+**Deliverables:**
+- LLM that can call tools: run diagnosis, compare flights, suggest parameter changes, generate report
+- Beautiful AI Chat interface
+- Strict physics-grounded prompting
 
-**Files to Modify:**
-- `src/cli/commands/batch.py` (enhance with progress bars)
-- `src/comparison/trend_analyzer.py` (add caching)
+**Key Files:**
+- `src/agent/llm_orchestrator.py`
+- `src/web/chat_interface.py`
 
 ---
 
-### Goal 10: Partial Multi-platform Support (v2)
-**Priority:** LOW  
-**Effort:** High  
-**Status:** ⬜ Not Started
+#### **Goal 7: Complete Output & User Experience Layer**
 
-**Requirements:**
-- [ ] Support Betaflight .bbl logs (optional plugin)
-- [ ] Support PX4 .ulg logs (optional plugin)
-- [ ] Scope as v2 or optional plugin
+**Objective:** Make the tool obviously more polished and useful.
 
-**Implementation Plan:**
-1. Research Betaflight/PX4 log formats
-2. Create plugin architecture
-3. Implement parsers as optional modules
+**Deliverables:**
+- Interactive dashboard (3D replay + graphs + chat)
+- Multi-flight trend & degradation analysis
+- Professional PDF report generation
+- Public demo deployment
 
-**Files to Create:**
-- `src/parser/betaflight_parser.py` (v2)
-- `src/parser/px4_parser.py` (v2)
+**Key Files:**
+- `src/web/dashboard.py`
+- `src/output/report_generator.py`
 
 ---
 
-## Implementation Order
+#### **Goal 8: Professional Engineering & Launch**
 
-**Week 1-2 (Phase 1):**
-1. ✅ Extended Failure Classes (quickest win)
-2. ✅ Better Report Exports (PDF + improved HTML)
-3. ⬜ Multi-flight Comparison Mode
+**Objective:** Make the project look more mature and production-ready.
 
-**Week 3-5 (Phase 2):**
-4. ⬜ Local AI Chat Assistant
-5. ⬜ Tuning Advisor Module
+**Deliverables:**
+- 300+ tests
+- Full CI/CD
+- Docker + one-command install
+- Excellent README + documentation
+- Public Hugging Face demo
+- 2–3 technical blog posts
 
-**Week 6-8 (Phase 3+):**
-6. ⬜ Agent/LLM-friendly JSON
-7. ⬜ Improved 3D Replay
-8. ⬜ Hardware Health Check
-9. ⬜ Batch Processing Improvements
-10. ⬜ Multi-platform Support (stretch goal)
-
----
-
-## Success Metrics
-
-After completing all goals:
-- **Feature Completeness:** Match or exceed BBA + smarttune-cli feature set
-- **User Experience:** Professional PDF reports + conversational AI
-- **Diagnostic Power:** 10+ failure classes with calibrated confidence
-- **Community Value:** Free, open-source, more powerful than SaaS alternatives
-- **Marketing Tagline:** "The most complete open-source ArduPilot log diagnosis + tuning tool"
+**Key Files:**
+- `tests/`
+- `Dockerfile`
+- `README.md` (world-class)
 
 ---
 
-## Risk Mitigation
+### **Final Architecture Summary (One Picture)**
 
-**To avoid conflicts and maintain stability:**
-1. **Branch Strategy:** Create feature branches for each goal
-2. **Test Coverage:** Maintain 176+ passing tests throughout
-3. **Data Safety:** Never modify existing test data; add new data separately
-4. **Backward Compatibility:** Keep existing CLI commands working
-5. **Incremental Deployment:** Merge one feature at a time after testing
-
-**Verification Steps Before Each Merge:**
-- [ ] Run `pytest` - all tests must pass
-- [ ] Test existing CLI commands still work
-- [ ] Verify sample.bin analysis unchanged
-- [ ] Check JSON output schema backward compatible
-- [ ] Update documentation
+```text
+Input (.bin / .ulg)
+   ↓
+Parser + 180 Features
+   ↓
+Physics Rules (Primary) → ML Support (GNN + XGBoost) → Temporal (HMM + Mamba)
+   ↓
+Hybrid Causal Engine v2
+   ↓
+Agentic LLM Orchestrator (Tool Calling)
+   ↓
+Beautiful Dashboard + AI Chat + PDF + Trends
+```
 
 ---
 
-*Last Updated: 2026-05-06*
-*Project: ArduPilot AI Log Diagnosis (BeastAyyG)*
-*GSoC 2026 Ready*
+This architecture is **strictly better** than current BeastAyyG in every dimension:
+- More features
+- Physics-first (more trustworthy)
+- GNN + advanced temporal (technical edge)
+- Full Agentic LLM (not just explanation)
+- PX4 support + multi-flight
+- Better UX + professional quality
