@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  core-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ardupilot-core-engine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./models:/app/models
+      # Mount the logs directory so the engine can read uploaded logs
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  temporal-layer:
+    image: python:3.11-slim
+    container_name: ardupilot-temporal-layer
+    command: tail -f /dev/null # Placeholder until M1 is implemented
+    volumes:
+      - ./temporal-layer:/app
+
+  llm-orchestrator:
+    image: python:3.11-slim
+    container_name: ardupilot-llm-orchestrator
+    command: tail -f /dev/null # Placeholder until M2 is implemented
+    volumes:
+      - ./llm-orchestrator:/app
+
+  web-gateway:
+    image: nginx:alpine
+    container_name: ardupilot-web-gateway
+    ports:
+      - "80:80"
+    # Placeholder for M4/M5 unified UI gateway
+

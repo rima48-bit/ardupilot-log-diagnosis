@@ -49,17 +49,17 @@ ardupilot-diagnosis-platform/
 
 **Goal:** Turn the existing monorepo into a clean, containerized platform.
 
-**Status:** ⬜ Not started
+**Status:** 🟩 Complete
 
 ### Tasks
 
-- [ ] Write `docker-compose.yml` that starts all services.
-- [ ] Create one folder per service, each with its own `Dockerfile`.
-- [ ] Port the current `core-engine` into its own container.
-- [ ] Create `feature-store` service that computes and caches features from `.BIN` files.
-- [ ] Set up `data-pipeline` service with Parquet storage + DuckDB querying.
-- [ ] Create `web-gateway` FastAPI service that routes requests to other services.
-- [ ] Update `.github/workflows/ci.yml` to build and test each service independently.
+- [x] Write `docker-compose.yml` that starts all services.
+- [x] Create one folder per service, each with its own `Dockerfile`.
+- [x] Port the current `core-engine` into its own container.
+- [x] Create `feature-store` service that computes and caches features from `.BIN` files.
+- [x] Set up `data-pipeline` service with Parquet storage + DuckDB querying.
+- [x] Create `web-gateway` FastAPI service that routes requests to other services.
+- [x] Update `.github/workflows/ci.yml` to build and test each service independently.
 
 ### Deliverable
 
@@ -68,8 +68,8 @@ through the gateway and returns the same results as before.
 
 ### Done when
 
-- [ ] Fresh clone + `docker compose up` works with no manual steps.
-- [ ] All 176 existing tests still pass inside the `core-engine` container.
+- [x] Fresh clone + `docker compose up` works with no manual steps.
+- [x] All 176 existing tests still pass inside the `core-engine` container.
 
 ---
 

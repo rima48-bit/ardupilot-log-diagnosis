@@ -1,0 +1,23 @@
+{
+  "generated_at_utc": "2026-03-16T23:09:14.209193+00:00",
+  "output_root": "data\\raw_downloads\\forum_expert_batch",
+  "downloads_dir": "data\\raw_downloads\\forum_expert_batch\\downloads",
+  "query_count": 6,
+  "topic_candidates": 30,
+  "topics_scanned": 30,
+  "topics_with_expert_label": 6,
+  "topics_without_expert_label": 24,
+  "topics_skipped_known_labeled": 0,
+  "topics_skipped_state": 0,
+  "rows": 1,
+  "downloaded": 0,
+  "not_log_payload": 1,
+  "download_failed": 0,
+  "artifacts": {
+    "manifest_csv": "data\\raw_downloads\\forum_expert_batch\\crawler_manifest_v2.csv",
+    "manifest_json": "data\\raw_downloads\\forum_expert_batch\\crawler_manifest_v2.json",
+    "block1_csv": "data\\raw_downloads\\forum_expert_batch\\block1_ardupilot_discuss.csv",
+    "summary_json": "data\\raw_downloads\\forum_expert_batch\\crawler_summary_v2.json",
+    "state_json": "data\\raw_downloads\\forum_expert_batch\\expert_miner_state.json"
+  }
+}

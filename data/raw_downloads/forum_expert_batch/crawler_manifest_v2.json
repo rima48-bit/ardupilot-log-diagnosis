@@ -1,0 +1,26 @@
+[
+  {
+    "label": "pid_tuning_issue",
+    "normalized_label": "pid_tuning_issue",
+    "query": "pid p gain oscillation crash",
+    "topic_id": 10696,
+    "topic_title": "Roll and pitch oscillations then crash",
+    "topic_url": "https://discuss.ardupilot.org/t/roll-and-pitch-oscillations-then-crash/10696",
+    "post_number": 1,
+    "post_url": "https://discuss.ardupilot.org/t/roll-and-pitch-oscillations-then-crash/10696/1",
+    "attachment_url": "https://www.dropbox.com/s/zoq9z8psdabo9xb/87%25208-8-2016%25207-11-58%2520%25CE%25BC%25CE%25BC.bin.log?dl=0",
+    "download_url": "https://www.dropbox.com/s/zoq9z8psdabo9xb/87%25208-8-2016%25207-11-58%2520%25CE%25BC%25CE%25BC.bin.log?dl=1",
+    "saved_file": "",
+    "status": "not_log_payload",
+    "kind": "html",
+    "bytes": 169666,
+    "error": "",
+    "source_type": "ArduPilot_Discuss",
+    "expert_username": "ChrisOlson",
+    "expert_post_number": 5,
+    "expert_quote": "Well, I still worry about your motor mounting. While it may seem \u201cstiff\u201d in a static situation on the bench, what you get dynamically when it\u2019s flying is usually different. If the motors are not staying in their static alignment once the aircraft is airborne, it will cause undesirable flight characteristics. So I would keep that in mind if nothing else works. You are using Pixhawk, and I am using APM2.8 clone board w",
+    "label_source": "developer_post",
+    "label_match": "pid",
+    "label_score": 3
+  }
+]
