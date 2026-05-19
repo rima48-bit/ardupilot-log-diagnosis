@@ -9,7 +9,7 @@ from src.runtime_paths import KNOWN_FAILURES_PATH, resolve_repo_path
 class FailureRetrieval:
     """Match new logs against database of known failures."""
 
-    def __init__(self, known_failures_path: str | os.PathLike[str] | None = None)-> None:
+    def __init__(self, known_failures_path: str | os.PathLike[str] | None = None) -> None:
         resolved_path = (
             resolve_repo_path(known_failures_path) if known_failures_path is not None else KNOWN_FAILURES_PATH
         )
